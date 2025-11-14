@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoDev 🚀 - Front-End Sustentável e Carreira Tech</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f8f0e3; /* Bege claro */
+      color: #3e2723; /* Marrom escuro */
+      text-align: center;
+    }
+
+    header {
+      background-color: green; /* Marrom mais escuro */
+      color: white;
+      padding: 1.5em 0;
+      font-size: 1.5em;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    section {
+      padding: 2.5em 1em;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #33691e; /* Verde musgo escuro */
+      margin-bottom: 0.8em;
+      border-bottom: 2px solid #aed581; /* Verde claro */
+      padding-bottom: 0.5em;
+    }
+    
+    h3 {
+        color: #33691e; /* Verde musgo escuro */
+    }
+
+    .dica, .info-box {
+      background-color: #e0e0b8; /* Amarelo esverdeado suave */
+      border-left: 6px solid #8bc34a; /* Verde folha */
+      padding: 1.5em;
+      margin: 1.5em 0;
+      border-radius: 10px;
+      text-align: left;
+      transition: transform 0.3s ease;
+    }
+    
+    .dica:hover, .info-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Simulador - Estilo mais sóbrio */
+    .simulador {
+      background: #e6ee9c; /* Verde claro pastel */
+      padding: 3em;
+      border-radius: 15px;
+    }
+
+    button {
+      background-color: #689f38; /* Verde oliva */
+      color: white;
+      border: none;
+      padding: 1em 2.5em;
+      border-radius: 25px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 1.5em;
+      transition: background-color 0.3s;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #558b2f;
+      box-shadow: 0 4px 8px rgba(104, 159, 56, 0.4);
+    }
+
+    /* Rodapé */
+    footer {
+      background: #33691e; /* Verde musgo escuro */
+      color: white;
+      padding: 1.5em;
+      margin-top: 3em;
+      font-size: 1em;
+    }
+    
+    /* Métricas de empregabilidade */
+    .metricas {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: space-around;
+        margin-top: 2em;
+        gap: 1em; 
+    }
+    
+    .metrica-item {
+        background: #e6ee9c; 
+        padding: 1.5em;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        width: 28%; 
+        min-width: 250px; 
+        flex-grow: 1; 
+    }
+    
+    .metrica-item h3 {
+        font-size: 2em;
+        margin: 0;
+        color: #689f38; 
+    }
+    
+    .metrica-item p {
+        margin: 0.5em 0 0;
+        font-size: 0.9em;
+        color: #4e342e; 
+    }
+
+    /* Estilos do jogo */
+    .jogo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5em;
+      margin-top: 2em;
+    }
+
+    .item {
+      width: 150px; 
+      height: 80px;
+      background: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      font-size: 1em; 
+      font-weight: bold;
+      color: #3e2723;
+      text-align: center;
+      transition: transform 0.1s ease-in-out;
+    }
+    .item.is-dragging {
+        transform: scale(1.05);
+        opacity: 0.7;
+    }
+
+    .lixeira {
+      width: 200px; 
+      height: 120px; 
+      border: 3px dashed #33691e; 
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #f1f8e9; 
+      transition: background 0.3s;
+      color: #3e2723;
+      font-weight: bold;
+      position: relative; /* Para posicionar a imagem */
+      padding-top: 10px; /* Espaço para o texto acima da imagem */
+    }
+
+    .lixeira:hover {
+      background: #dce775; 
+    }
+    #score-display {
+        margin-top: 1em;
+        font-size: 1.1em;
+    }
+
+    .lixeira img {
+        width: 60px; /* Ajuste o tamanho da imagem conforme necessário */
+        height: 60px;
+        object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+        margin-bottom: 5px; /* Espaçamento entre a imagem e o texto */
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    ⚛️ EcoDev — Front-End Sustentável, Carreira e Inovação!
+  </header>
+
+  <section id="frontend">
+    <h2>🚀 Front-End Sustentável: Otimização e Performance</h2>
+    <div class="dica">
+        <h3>Divisão de Código e Carregamento Sob Demanda</h3>
+        <p>Divida seu código JavaScript em **partes menores** (chunks) e carregue módulos (como componentes ou rotas) **apenas quando forem necessários** (Carregamento Sob Demanda - Lazy Loading). Isso reduz a quantidade de dados transferidos e o tempo de carregamento inicial, economizando energia tanto do seu site quanto do navegador do usuário.</p>
+    </div>
+    <div class="dica">
+        <h3>Imagens Adaptáveis e de Nova Geração</h3>
+        <p>Utilize a tag <code>&lt;picture&gt;</code> e o atributo <code>srcset</code> para fornecer imagens no tamanho mais adequado para cada dispositivo. Dê preferência a formatos modernos como **WebP** e **AVIF**, que comprimem mais as imagens, mantendo uma excelente qualidade e economizando banda.</p>
+    </div>
+    <div class="dica">
+        <h3>Otimização do DOM e Renderização</h3>
+        <p>Minimize as operações de **re-renderização desnecessárias** (especialmente em frameworks como React ou Vue) e simplifique a estrutura do DOM (Document Object Model). Assim, o navegador do usuário consumirá menos poder de processamento para exibir a página.</p>
+    </div>
+  </section>
+  
+  <hr>
+
+  <section id="empregabilidade">
+    <h2>📈 Sustentabilidade + Código = Empregabilidade Inovadora</h2>
+    <p>O mercado de tecnologia valoriza cada vez mais profissionais que unem **Performance** (capacidade de economizar recursos) e **Ética**. Desenvolvedores com foco em sustentabilidade digital são vistos como inovadores e essenciais para o futuro.</p>
+    
+    <div class="metricas">
+        <div class="metrica-item">
+            <h3>+25%</h3>
+            <p>Aumento estimado na demanda por desenvolvedores de 'Software Verde' (Green Software).</p>
+        </div>
+        <div class="metrica-item">
+            <h3>Eco-Score</h3>
+            <p>Sites leves e rápidos melhoram o SEO e a reputação ecológica (Eco-Score) da empresa.</p>
+        </div>
+        <div class="metrica-item">
+            <h3>Liderança</h3>
+            <p>Posicione-se como um agente de **inovação** e eficiência, liderando em práticas sustentáveis.</p>
+        </div>
+    </div>
+    
+    <div class="info-box">
+        <h3>🎯 Dica de Carreira</h3>
+        <p>Destaque a otimização de performance e a redução da pegada de carbono dos seus projetos no seu **currículo** e **portfólio**. Isso demonstra alinhamento com tendências globais e responsabilidade técnica, fatores decisivos em entrevistas.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="simulador">
+    <h2>🔋 Simulador de Impacto do Código (Experiência do Usuário e Ecologia)</h2>
+    <p>Descubra como a otimização do seu código Front-End melhora a experiência do usuário e economiza recursos do servidor.</p>
+    <button onclick="simular()">Calcular Otimização</button>
+    <p id="resultado"></p>
+  </section>
+  
+  <hr>
+
+  <section id="jogo">
+    <h2>♻️ Desafio</h2>
+    <p>Ligue cada palavra a sua linguagem de desenvolvimento e programação..</p>
+    <div class="jogo">
+      <div class="item" draggable="true" id="legado-js">Estilo</div>
+      <div class="item" draggable="true" id="css-duplicado">Estrutura</div>
+      <div class="item" draggable="true" id="imagens-nao-otim">Interação com o site</div>
+    </div>
+
+    <div class="jogo">
+     
+      <div class="lixeira" id="lixeira-refatoracao-2">
+        <img src="https://hermes.dio.me/articles/cover/88153d7f-6a9c-4b57-8e92-123a69ba1beb.png" alt="Ícone de Lixeira">
+       CSS
+      </div>
+      <div class="lixeira" id="lixeira-refatoracao-3">
+        <img src="https://hermes.dio.me/articles/cover/a4b5221c-5d38-4f82-830e-78a655b87de6.jpg" alt="Ícone de Lixeira">
+     JavaScript
+      </div>
+      <div class="lixeira" id="lixeira-refatoracao-1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png" alt="Ícone de Lixeira">
+        HTML
+      </div>
+     
+    <p id="mensagem"></p>
+  </section>
+
+  <footer>
+    Feito com 💚 e 💻 por EcoDev Team | Inovação Sustentável
+  </footer>
+
+  <script>
+    // --- Variáveis Globais e Inicialização do Placar ---
+    let score = 0;
+    const totalItens = document.querySelectorAll('.item').length;
+    let scoreDisplay; // Elemento para mostrar o placar
+
+    // --- Simulador de Impacto de Código (UX/Eco) ---
+    function simular() {
+        const ms = Math.floor(Math.random() * 800) + 150; 
+        const economia = Math.floor(Math.random() * 30) + 5; 
+        document.getElementById('resultado').innerHTML = 
+            `Seu código otimizado resultou em **${ms}ms** de tempo de carregamento e **${economia}%** de economia na transferência de dados! ⚡`;
+    }
+
+    // --- Jogo de Refatoração (Drag and Drop) ---
+
+    // Função para atualizar o Placar na tela
+    function updateScoreDisplay() {
+        if (!scoreDisplay) {
+            // Cria o elemento de placar se ainda não existir
+            scoreDisplay = document.createElement('p');
+            scoreDisplay.id = 'score-display';
+            // Insere o placar logo após o título H2 do jogo
+            document.querySelector('#jogo h2').insertAdjacentElement('afterend', scoreDisplay);
+        }
+        scoreDisplay.innerHTML = `**Refatorados: ${score} / ${totalItens}**`;
+        scoreDisplay.style.color = "#3e2723"; 
+        scoreDisplay.style.fontWeight = "bold";
+    }
+
+    const itens = document.querySelectorAll('.item');
+    const lixeiras = document.querySelectorAll('.lixeira');
+    const mensagem = document.getElementById('mensagem');
+
+    // Configura listeners para os itens arrastáveis
+    itens.forEach(item => {
+        item.addEventListener('dragstart', dragStart);
+        // Garante que o item não tenha dragstart novamente se já foi refatorado (útil se o jogo for resetado)
+        if (item.classList.contains('refatorado')) {
+            item.setAttribute('draggable', false);
+        }
+    });
+
+    // Configura listeners para as lixeiras
+    lixeiras.forEach(lixeira => {
+        lixeira.addEventListener('dragover', dragOver);
+        lixeira.addEventListener('drop', drop);
+        lixeira.addEventListener('dragenter', dragEnter); // Adiciona feedback visual
+        lixeira.addEventListener('dragleave', dragLeave); // Remove feedback visual
+    });
+
+    // Inicializa o placar quando a página carrega
+    document.addEventListener('DOMContentLoaded', updateScoreDisplay);
+
+
+    function dragStart(e) {
+        // Armazena o ID do item que está sendo arrastado
+        e.dataTransfer.setData('id', e.target.id);
+        // Adiciona uma classe para dar feedback visual de que o item está sendo arrastado
+        e.target.classList.add('is-dragging');
+    }
+
+    function dragOver(e) {
+        // Previne o comportamento padrão para permitir o drop
+        e.preventDefault();
+    }
+
+    function dragEnter(e) {
+        // Adiciona feedback visual à lixeira quando um item entra nela
+        e.preventDefault();
+        // Garante que o evento está na própria lixeira ou em um de seus filhos
+        const targetLixeira = e.target.closest('.lixeira');
+        if (targetLixeira) {
+            targetLixeira.style.background = '#c5e1a5'; // Cor de destaque ao arrastar sobre
+        }
+    }
+
+    function dragLeave(e) {
+        // Remove feedback visual da lixeira quando um item sai dela
+        // Garante que o evento está na própria lixeira ou em um de seus filhos
+        const targetLixeira = e.target.closest('.lixeira');
+        if (targetLixeira) {
+            targetLixeira.style.background = '#f1f8e9'; // Volta à cor normal
+        }
+    }
+
+    function drop(e) {
+        e.preventDefault(); // Previne o comportamento padrão (ex: abrir imagem em nova aba)
+
+        // Remove a classe de arrastando do item
+        const draggedItem = document.querySelector('.is-dragging');
+        if (draggedItem) {
+            draggedItem.classList.remove('is-dragging');
+        }
+
+        // Remove feedback visual da lixeira
+        const targetLixeira = e.target.closest('.lixeira');
+        if (targetLixeira) {
+            targetLixeira.style.background = '#f1f8e9'; // Volta à cor normal
+        }
+
+        const id = e.dataTransfer.getData('id');
+        const item = document.getElementById(id);
+        
+        // Verifica se o item existe, se ainda não foi refatorado e se o drop foi em uma lixeira válida
+        if (item && !item.classList.contains('refatorado') && targetLixeira) {
+            
+            // Lógica de Sucesso (Refatoração)
+            mensagem.textContent = `✅ Refatorado! O item "${item.textContent.trim()}" foi limpo!`;
+            mensagem.style.color = "#33691e"; // Verde musgo
+            
+            // Remove o item do DOM e marca como refatorado
+            item.classList.add('refatorado');
+            item.style.display = 'none'; // Esconde o item
+            item.setAttribute('draggable', false); // Impede que seja arrastado novamente
+            
+            // Atualiza o placar
+            score++;
+            updateScoreDisplay();
+            
+            if (score === totalItens) {
+                mensagem.innerHTML = `🎉 **PARABÉNS! Você estrututou todo o código  e atingiu o Código Verde!** 🎉`;
+                mensagem.style.color = "#4e342e"; // Marrom escuro para destaque final
+            }
+
+        } else if (item && item.classList.contains('refatorado')) {
+             mensagem.textContent = `Este item já foi refatorado!`;
+             mensagem.style.color = "#4e342e"; 
+        } else {
+            // Lógica de Erro: Item não foi jogado na lixeira
+            mensagem.textContent = "❌ Tente novamente! Arraste para a Lixeira de Refatoração!";
+            mensagem.style.color = "#b71c1c"; // Vermelho mais forte
+        }
+    }
+  </script>
+</body>
+</html>
